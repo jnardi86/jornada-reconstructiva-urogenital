@@ -242,6 +242,13 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 14px 18px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color .15s ease;
+    }
+
+    .meta-chip:hover {
+      border-color: var(--teal-dim);
     }
 
     .meta-chip .ic {
@@ -1149,7 +1156,7 @@
             <div class="value">3 – 4 de diciembre, 2026</div>
           </div>
         </div>
-        <div class="meta-chip">
+        <!-- <div class="meta-chip">
           <div class="ic"><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
               <path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" />
@@ -1159,7 +1166,21 @@
             <div class="label">Sede</div>
             <div class="value">Hospital Santojanni</div>
           </div>
-        </div>
+        </div> -->
+        <a class="meta-chip"
+          href="https://www.google.com/maps/search/?api=1&query=Hospital+General+de+Agudos+Santojanni+Pilar+950+CABA"
+          target="_blank" rel="noopener">
+          <div class="ic">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+          </div>
+          <div>
+            <div class="label">Sede</div>
+            <div class="value">Hospital Santojanni</div>
+          </div>
+        </a>
         <div class="meta-chip">
           <div class="ic"><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
