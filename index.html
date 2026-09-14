@@ -743,55 +743,263 @@
       color: var(--ink);
     }
 
-    /* SPEAKERS (oculta hasta tener data) */
+    /* SPEAKERS */
+
     .speakers-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
     }
+
+    /* CARD */
 
     .speaker-card {
-      background: var(--navy-panel);
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg,
+          rgba(255, 255, 255, 0.025) 0%,
+          rgba(255, 255, 255, 0) 100%),
+        var(--navy-panel);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 24px;
-      text-align: left;
+      border-radius: 18px;
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
     }
+
+
+    .speaker-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(45, 212, 191, .35);
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, .25);
+    }
+
+    /* FOTO */
 
     .speaker-photo {
-      width: 100%;
-      aspect-ratio: 1/1;
-      border-radius: 12px;
-      background: var(--navy-panel-2);
-      background-size: cover;
-      background-position: center;
-      margin-bottom: 16px;
-      border: 1px solid var(--line);
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(45, 212, 191, .08), transparent 70%),
+        var(--navy-panel-2);
     }
 
+    .speaker-photo-frame {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background: rgba(255, 255, 255, .025);
+      border: 1px solid rgba(255, 255, 255, .10);
+    }
+
+    .speaker-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+      transform: scale(1.35);
+      transform-origin: center bottom;
+    }
+
+    /* brillo muy sutil detrás del disertante */
+
+    .speaker-photo::before {
+      content: "";
+      position: absolute;
+      width: 65%;
+      height: 65%;
+      top: 20%;
+      left: 17.5%;
+      background: var(--teal-bright);
+      opacity: .05;
+      filter: blur(50px);
+      border-radius: 50%;
+    }
+
+    .speaker-photo img {
+      position: relative;
+      z-index: 1;
+      width: auto;
+      height: auto;
+      max-width: 68%;
+      max-height: 195px;
+      object-fit: contain;
+      object-position: center bottom;
+      transition: transform .35s ease;
+    }
+
+    .speaker-card:hover {
+      transform: scale(1.02);
+    }
+
+    /* INFORMACIÓN */
+
+    .speaker-content {
+      padding: 20px 22px 24px;
+    }
+
+
     .speaker-name {
-      font-size: 16px;
-      font-weight: 600;
+      margin: 0;
       color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.25;
     }
 
     .speaker-role {
-      font-size: 12.5px;
+      margin-top: 6px;
       color: var(--teal-bright);
-      margin-top: 3px;
       font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.45;
+      text-transform: uppercase;
+      letter-spacing: .04em;
     }
 
     .speaker-desc {
-      font-size: 13.5px;
+      margin: 14px 0 0;
       color: var(--muted);
-      margin-top: 10px;
+      font-size: 13.5px;
+      line-height: 1.65;
     }
 
-    @media (max-width: 860px) {
+    /* META / NACIONALIDAD DISERTANTES */
+
+    .speaker-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 11px;
+    }
+
+
+    .speaker-country {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: .02em;
+    }
+
+
+    .speaker-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 9px;
+      background: rgba(45, 212, 191, .10);
+      border: 1px solid rgba(45, 212, 191, .22);
+      border-radius: 999px;
+      color: var(--teal-bright);
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+
+    .country-flag {
+      width: 18px;
+      height: 12px;
+      flex-shrink: 0;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, .14);
+    }
+
+    /* TABLET */
+
+    @media (max-width: 900px) {
+
+      .speakers-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .speaker-photo {
+        height: 210px;
+      }
+
+      .speaker-photo img {
+        height: 92%;
+        max-height: 195px;
+      }
+
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
       .speakers-grid {
         grid-template-columns: 1fr;
+        gap: 18px;
       }
+
+      .speaker-card {
+        max-width: 380px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .speaker-content {
+        padding: 18px 20px 22px;
+      }
+
+      .speaker-name {
+        font-size: 17px;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .speakers-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .speaker-card {
+        max-width: 340px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .speaker-photo {
+        height: 185px;
+      }
+
+      .speaker-photo img {
+        height: 94%;
+        max-height: 175px;
+      }
+
+      .speaker-content {
+        padding: 18px 20px 22px;
+      }
+
+      .speaker-name {
+        font-size: 17px;
+      }
+
     }
 
     /* FORM */
@@ -1197,30 +1405,30 @@
       }
 
 
-    @keyframes sponsors-scroll {
-      from {
-        transform: translateX(0);
+      @keyframes sponsors-scroll {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(-50%);
+        }
       }
 
-      to {
-        transform: translateX(-50%);
+      .tl-row {
+        grid-template-columns: 80px 1fr;
+        gap: 14px;
       }
-    }
 
-    .tl-row {
-      grid-template-columns: 80px 1fr;
-      gap: 14px;
-    }
+      .tl-row:not(:last-child)::before {
+        left: 80px;
+        margin-left: 14px;
+      }
 
-    .tl-row:not(:last-child)::before {
-      left: 80px;
-      margin-left: 14px;
-    }
-
-    .tl-dot {
-      left: 80px;
-      margin-left: 10px;
-    }
+      .tl-dot {
+        left: 80px;
+        margin-left: 10px;
+      }
     }
   </style>
 </head>
@@ -1739,7 +1947,7 @@
   2) borrar el atributo style="display:none;" de la etiqueta <section> siguiente.
   También conviene agregar un link "Disertantes" en el footer y en la nav si se activa.
 -->
-  <section id="disertantes" style="display:none;">
+  <!-- <section id="disertantes" style="display:none;">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">Panel de expertos</span>
@@ -1750,9 +1958,10 @@
       <div class="speakers-grid">
         <div class="speaker-card">
           <div class="speaker-photo"></div>
-          <div class="speaker-name">Nombre Apellido</div>
-          <div class="speaker-role">Especialidad · Institución / país</div>
-          <div class="speaker-desc">Breve bio o línea de trayectoria del disertante.</div>
+          <div class="speaker-name">Mauro Guido</div>
+          <div class="speaker-role">Coordinador Jornadas</div>
+          <div class="speaker-desc">Especialista en urología. Sección de cirugía transgénero y genital reconstructiva
+            del Hospital Santojanni. Buenos Aires. </div>
         </div>
         <div class="speaker-card">
           <div class="speaker-photo"></div>
@@ -1767,6 +1976,388 @@
           <div class="speaker-desc">Breve bio o línea de trayectoria del disertante.</div>
         </div>
       </div>
+    </div>
+  </section> -->
+
+  <section id="disertantes">
+    <div class="wrap">
+
+      <div class="section-head">
+        <span class="kicker">Panel de expertos</span>
+
+        <h2 class="section-title">
+          Disertantes invitados
+        </h2>
+
+        <p class="section-desc">
+          Especialistas nacionales e internacionales en reconstrucción urogenital,
+          cirugía genital reconstructiva y cirugía de afirmación de género.
+        </p>
+      </div>
+
+
+      <div class="speakers-grid">
+
+        <!-- DR. MAURO GUIDO -->
+        <article class="speaker-card">
+          <div class="speaker-photo">
+            <div class="speaker-photo-frame">
+              <img src="assets/disertantes/guido-mauro.png" alt="Dr. Mauro Guido" loading="lazy">
+            </div>
+          </div>
+          <div class="speaker-content">
+            <div class="speaker-meta">
+              <span class="speaker-badge">Coordinador del curso</span>
+              <span class="speaker-country">
+                <img src="assets/flags/ar.svg" alt="" class="country-flag">
+                Argentina
+              </span>
+            </div>
+            <h3 class="speaker-name">
+              Dr. Mauro Guido
+            </h3>
+            <div class="speaker-role">
+              Especialista en Urología
+            </div>
+            <p class="speaker-desc">
+              Sección de Cirugía Transgénero y Genital Reconstructiva del
+              Hospital Santojanni. Buenos Aires, Argentina.
+            </p>
+          </div>
+        </article>
+
+
+        <!-- DR. CÉSAR EISNER -->
+        <article class="speaker-card">
+
+          <div class="speaker-photo">
+            <div class="speaker-photo-frame">
+              <img src="assets/disertantes/cesar-eisner.png" alt="Dr. César Eisner" loading="lazy">
+            </div>
+          </div>
+
+          <div class="speaker-content">
+
+            <div class="speaker-meta">
+              <span class="speaker-country">
+                <img src="assets/flags/ar.svg" alt="" class="country-flag">
+                Argentina
+              </span>
+            </div>
+
+            <h3 class="speaker-name">
+              Dr. César Eisner
+            </h3>
+
+            <div class="speaker-role">
+              Especialista en Diagnóstico por Imágenes
+            </div>
+
+            <p class="speaker-desc">
+              Director del Instituto Shockwave Argentina.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- DRA. ROCÍO GLASSMAN -->
+        <article class="speaker-card">
+          <div class="speaker-photo">
+            <div class="speaker-photo-frame">
+              <img src="assets/disertantes/rocio-glassman.png" alt="Dra. Rocío Glassman" loading="lazy">
+            </div>
+          </div>
+
+          <div class="speaker-content">
+
+            <div class="speaker-meta">
+              <span class="speaker-country">
+                <img src="assets/flags/ar.svg" alt="" class="country-flag">
+                Argentina
+              </span>
+            </div>
+
+            <h3 class="speaker-name">
+              Dra. Rocío Glassman
+            </h3>
+
+            <div class="speaker-role">
+              Especialista en Ginecología y Obstetricia
+            </div>
+
+            <p class="speaker-desc">
+              Especialista en Ginecología Endocrinológica y Sexología Clínica.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- DRA. CLAUDIA CAPANDEGUI -->
+        <article class="speaker-card">
+
+          <div class="speaker-photo">
+            <div class="speaker-photo-frame">
+              <img src="assets/disertantes/claudia-capandegui.png" alt="Dra. Claudia Capandegui" loading="lazy">
+            </div>
+          </div>
+
+          <div class="speaker-content">
+
+            <div class="speaker-meta">
+              <span class="speaker-country">
+                <img src="assets/flags/ar.svg" alt="" class="country-flag">
+                Argentina
+              </span>
+            </div>
+
+            <h3 class="speaker-name">
+              Dra. Claudia Capandegui
+            </h3>
+
+            <div class="speaker-role">
+              Especialista en Tocoginecología
+            </div>
+
+            <p class="speaker-desc">
+              Jefa de la Sección de Hormonización de Salud Trans del
+              Hospital Gutiérrez de La Plata, Buenos Aires.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- DR. GABRIEL DEL CORRAL -->
+        <article class="speaker-card">
+
+
+          <div class="speaker-photo">
+            <div class="speaker-photo-frame">
+              <img src="assets/disertantes/gabriel-del-corral.png" alt="Dr. Gabriel Del Corral" loading="lazy">
+            </div>
+
+          </div>
+
+          <div class="speaker-content">
+
+            <div class="speaker-meta">
+              <span class="speaker-country">
+                <img src="assets/flags/ar.svg" alt="" class="country-flag">
+                Argentina
+              </span>
+            </div>
+
+            <h3 class="speaker-name">
+              Dr. Gabriel Del Corral
+            </h3>
+
+            <div class="speaker-role">
+              Especialista en Cirugía Plástica y Reconstructiva
+            </div>
+
+            <p class="speaker-desc">
+              Professor of Plastic Surgery y Professor of Urology en
+              MedStar Georgetown University Hospital. Director del
+              MedStar Center for Gender Affirmation, Department of Plastic
+              Surgery, Franklin Square Medical Center.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- DR. CÉSAR FIDALGO -->
+        <article class="speaker-card">
+
+          <div class="speaker-photo">
+            <div class="speaker-photo-frame">
+              <img src="assets/disertantes/cesar-fidalgo.png" alt="Dr. César Fidalgo" loading="lazy">
+            </div>
+
+          </div>
+
+          <div class="speaker-content">
+
+            <div class="speaker-meta">
+              <span class="speaker-country">
+                <img src="assets/flags/ar.svg" alt="" class="country-flag">
+                Argentina
+              </span>
+            </div>
+
+            <h3 class="speaker-name">
+              Dr. César Fidalgo
+            </h3>
+
+            <div class="speaker-role">
+              Especialista en Urología y Cirugía Reconstructiva
+            </div>
+
+            <p class="speaker-desc">
+              Ex jefe del Servicio de Urología del Hospital Gutiérrez
+              de La Plata, Buenos Aires.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- DR. ENRIQUE LLEDÓ GARCÍA -->
+        <article class="speaker-card">
+
+          <div class="speaker-photo">
+            <div class="speaker-photo-frame">
+              <img src="assets/disertantes/enrique-lledo.png" alt="Dr. Enrique Lledó García" loading="lazy">
+            </div>
+
+          </div>
+
+          <div class="speaker-content">
+
+            <div class="speaker-meta">
+              <span class="speaker-country">
+                <img src="assets/flags/es.svg" alt="" class="country-flag">
+                España
+              </span>
+            </div>
+
+            <h3 class="speaker-name">
+              Dr. Enrique Lledó García
+            </h3>
+
+            <div class="speaker-role">
+              Especialista en Urología
+            </div>
+
+            <p class="speaker-desc">
+              Especialista en cirugía reconstructiva genital y protésica.
+              Jefe del Servicio de Urología del Hospital Gregorio Marañón,
+              Madrid, España.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- DR. DAMIÁN LÓPEZ ALVARADO -->
+        <article class="speaker-card">
+
+          <div class="speaker-photo">
+            <div class="speaker-photo-frame">
+              <img src="assets/disertantes/damian-lopez-alvarado.png" alt="Dr. Damián López Alvarado" loading="lazy">
+            </div>
+
+          </div>
+
+          <div class="speaker-content">
+
+            <div class="speaker-meta">
+              <span class="speaker-country">
+                <img src="assets/flags/mx.svg" alt="" class="country-flag">
+                México
+              </span>
+            </div>
+
+            <h3 class="speaker-name">
+              Dr. Damián López Alvarado
+            </h3>
+
+            <div class="speaker-role">
+              Especialista en Urología
+            </div>
+
+            <p class="speaker-desc">
+              Subespecialista en cirugía reconstructiva y transgénero.
+              Hospital Regional Adolfo López Mateos y Centro de Uretra México.
+              Ciudad de México, México.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- DR. SEIICHI FUZIWARA RUIZ -->
+        <article class="speaker-card">
+
+          <div class="speaker-photo">
+            <div class="speaker-photo-frame">
+              <img src="assets/disertantes/seiichi-ruiz.png" alt="Dr. Seiichi Fuziwara Ruiz" loading="lazy">
+            </div>
+          </div>
+
+          <div class="speaker-content">
+
+            <div class="speaker-meta">
+              <span class="speaker-country">
+                <img src="assets/flags/mx.svg" alt="" class="country-flag">
+                México
+              </span>
+            </div>
+
+            <h3 class="speaker-name">
+              Dr. Seiichi Fuziwara Ruiz
+            </h3>
+
+            <div class="speaker-role">
+              Especialista en Urología
+            </div>
+
+            <p class="speaker-desc">
+              Subespecialista en cirugía genital reconstructiva.
+              Hospital de Oncología del Centro Médico Nacional Siglo XXI
+              y Hospital Español. Ciudad de México, México.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- DR. MAURO VALENTINI -->
+        <article class="speaker-card">
+          <div class="speaker-photo">
+            <div class="speaker-photo-frame">
+              <img src="assets/disertantes/mauro-valentini.png" alt="Dr. Mauro Valentini" loading="lazy">
+            </div>
+          </div>
+
+          <div class="speaker-content">
+
+            <div class="speaker-meta">
+              <span class="speaker-country">
+                <img src="assets/flags/ar.svg" alt="" class="country-flag">
+                Argentina
+              </span>
+            </div>
+
+            <h3 class="speaker-name">
+              Dr. Mauro Valentini
+            </h3>
+
+            <div class="speaker-role">
+              Especialista en Urología
+            </div>
+
+            <p class="speaker-desc">
+              Sección de Cirugía Reconstructiva del Hospital Álvarez de
+              Buenos Aires y del Hospital Italiano de La Plata.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
     </div>
   </section>
 
