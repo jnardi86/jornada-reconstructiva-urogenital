@@ -731,16 +731,44 @@
     }
 
     .organized-by {
-      margin-top: 24px;
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 13.5px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.025);
+      color: var(--muted);
+    }
+
+    .organized-by-icon {
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: rgba(45, 212, 191, .08);
+      color: var(--teal-bright);
+    }
+
+    .organized-by-content {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px 6px;
+      min-width: 0;
+    }
+
+    .organized-by-label {
+      font-size: 13px;
       color: var(--muted);
     }
 
     .organized-by strong {
       color: var(--ink);
+      font-weight: 600;
     }
 
     /* SPEAKERS */
@@ -1343,6 +1371,41 @@
         grid-template-columns: 1fr;
       }
 
+      .organized-by {
+        align-items: flex-start;
+        gap: 10px;
+
+        padding: 14px;
+      }
+
+      .organized-by-icon {
+        width: 32px;
+        height: 32px;
+      }
+
+      .organized-by-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+      }
+
+      .organized-by-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+
+      .organized-by strong {
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .organized-by-hospital {
+        font-size: 12.5px;
+        line-height: 1.45;
+      }
+
       .dir-avatar {
         width: 96px;
         height: 96px;
@@ -1361,6 +1424,7 @@
       .form-grid {
         grid-template-columns: 1fr;
       }
+
 
       /* .sponsor-item {
         width: 120px;
@@ -1939,11 +2003,22 @@
         </div>
       </div>
       <div class="organized-by">
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1" />
-        </svg>
-        Organiza <strong>Servicio de Urología</strong> — Hospital General de Agudos Donación Francisco Santojanni
+        <div class="organized-by-icon">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1" />
+          </svg>
+        </div>
+
+        <div class="organized-by-content">
+          <span class="organized-by-label">Organiza</span>
+
+          <strong>Servicio de Urología</strong>
+
+          <span class="organized-by-hospital">
+            Hospital General de Agudos Donación Francisco Santojanni
+          </span>
+        </div>
       </div>
     </div>
   </section>
